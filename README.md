@@ -15,4 +15,5 @@ A no frills, interactive approach to apply git operations across multiple reposi
 
 ## Alternatives
 
-- [Mono-repo or multi-repo? ...](https://medium.com/@patrickleet/mono-repo-or-multi-repo-why-choose-one-when-you-can-have-both-e9c77bd0c668)
+- [meta](https://github.com/mateodelnorte/meta): "tool for turning many repos into a meta repo. why choose many repos or a monolithic repo, when you can have both with a meta repo?"
+  - [Mono-repo or multi-repo? ...](https://medium.com/@patrickleet/mono-repo-or-multi-repo-why-choose-one-when-you-can-have-both-e9c77bd0c668)
