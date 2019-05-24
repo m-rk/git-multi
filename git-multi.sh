@@ -6,10 +6,18 @@ echo "Perform selected Git operations on ALL repositories in the current directo
 echo ""
 
 PS3='Choose an action: '
-options=("Discard file(s)..." "Stash & Checkout..." "Pull" "Create & Push..." "Quit")
+options=("Status" "Pull" "Discard file(s)..." "Stash & Checkout..." "Create & Push..." "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
+        "Status")
+            echo "Status"
+            break
+            ;;
+        "Pull")
+            echo "Pull"
+            break
+            ;;
         "Discard file(s)...")
             echo "Discard file(s) based on a specified pattern. Use ** for all subdirs, e.g. **/package-lock.json"
             read -p "File pattern [*]: " filepattern
@@ -20,10 +28,6 @@ do
             #read -p "Stash name []: " stash
             read -p "Branch name [master]: " branch
             branch=${branch:-master}
-            break
-            ;;
-        "Pull")
-            echo "Pull"
             break
             ;;
         "Create & Push...")
@@ -47,15 +51,18 @@ for D in *; do
         echo "${D}"
 
         case $opt in
+            "Status")
+                git status
+                ;;
+            "Pull")
+                git pull
+                ;;
             "Discard file(s)...")
                 git checkout -- $filepattern
                 ;;
             "Stash & Checkout...")
                 git stash save --keep-index --include-untracked
                 git checkout "$branch"
-                ;;
-            "Pull")
-                git pull
                 ;;
             "Create & Push...")
                 git checkout -b "$branch"
