@@ -1,12 +1,28 @@
 #!/bin/bash
+RED='\033[0;31m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
 echo ""
-echo "#### Git multi-repo operations #####"
+echo -e "${CYAN}#### Git multi-repo operations #####${NC}"
 echo ""
 echo "Perform selected Git operations on ALL repositories in the current directory."
 echo ""
 
-PS3='Choose an action: '
-options=("Status" "Pull" "Discard file(s)..." "Stash & checkout..." "Create branch, commit & push..." "Quit")
+confirm() {
+    # call with a prompt string or use a default
+    read -r -p "${1:-Are you sure? [y/N]} " response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+
+PS3="Choose an action: "
+options=("Status" "Pull" "Discard file(s)..." "Stash & checkout..." "Create branch, commit & push..." "Prune")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -36,8 +52,12 @@ do
             read -p "Commit message []: " message
             break
             ;;
-        "Quit")
-            exit 0
+        "Prune")
+            echo "Prune"
+            if ! confirm "This is a destructive operation. Are you sure? [y/N]";
+            then
+                exit 0
+            fi
             break
             ;;
         *) echo "invalid option $REPLY";;
@@ -69,6 +89,10 @@ for D in *; do
                 git add *
                 git commit -m "$message"
                 git push -u origin HEAD
+                ;;
+            "Prune")
+                echo -e "${CYAN}git remote prune origin${NC}"
+                git remote prune origin
                 ;;
         esac
 
