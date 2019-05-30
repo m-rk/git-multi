@@ -2,10 +2,12 @@
 
 A no frills, interactive approach to apply git operations across multiple repositories in one fell swoop. For example:
 
+- Status
+- Pull
 - Discard file(s)...
 - Stash & checkout...
-- Pull
-- Create & push...
+- Create branch, commit & push...
+- Prune
 
 ## Usage
 
