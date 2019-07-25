@@ -36,7 +36,8 @@ do
             ;;
         "Discard file(s)...")
             echo "Discard file(s) based on a specified pattern. Use ** for all subdirs, e.g. **/package-lock.json"
-            read -p "File pattern []: " filepattern
+            read -p "File pattern [**/package-lock.json]: " filepattern
+            filepattern=${filepattern:-**/package-lock.json}
             break
             ;;
         "Stash & checkout...")
