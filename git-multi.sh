@@ -87,7 +87,7 @@ for D in *; do
                 ;;
             "Create branch, commit & push...")
                 git checkout -b "$branch"
-                git add *
+                git add .
                 git commit -m "$message"
                 git push -u origin HEAD
                 ;;
