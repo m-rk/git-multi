@@ -22,7 +22,7 @@ confirm() {
 }
 
 PS3="Choose an action: "
-options=("Status" "Pull" "Discard file(s)..." "Stash & checkout..." "Create branch, commit & push..." "Prune")
+options=("Status" "Pull" "Discard file(s)..." "Stash & checkout..." "Create branch, add, commit & push..." "Prune")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -47,7 +47,7 @@ do
             branch=${branch:-master}
             break
             ;;
-        "Create branch, commit & push...")
+        "Create branch, add, commit & push...")
             echo "Create a new branch, add all existing changes, commit and push to origin"
             read -p "Branch name []: " branch
             read -p "Commit message []: " message
@@ -85,7 +85,7 @@ for D in *; do
                 git stash save --keep-index --include-untracked
                 git checkout "$branch"
                 ;;
-            "Create branch, commit & push...")
+            "Create branch, add, commit & push...")
                 git checkout -b "$branch"
                 git add .
                 git commit -m "$message"
